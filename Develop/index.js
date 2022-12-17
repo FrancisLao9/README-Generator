@@ -67,21 +67,22 @@ const questions = [
             message: 'Enter Email Address: '
         },
     ];
+    
 // TODO: Create a function to write README file
 function writeToFile(filename, data) {
+        fs.writeFile(filename, data, (err) =>
+            err ? console.log(err) : console.log('Created README file...')
+        );
+}
+
+// TODO: Create a function to initialize app
+function init() {    
     inquirer
     .prompt(questions)
     .then((info)=> {
         const content = generateMarkdown(info);
-        fs.writeFile(filename, content, (err) =>
-            err ? console.log(err) : console.log('Created README file...')
-        );
+        writeToFile('README.md', content);
     });
-}
-
-// TODO: Create a function to initialize app
-function init() {
-    writeToFile();
 }
 
 // Function call to initialize app
